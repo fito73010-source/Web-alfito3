@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Website profil pribadi Alfito Ghavin Setyadi">
+  <title>Profil Fito</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #f8fafc;
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(circle at 10% 15%, rgba(0, 174, 255, .35), transparent 25%),
+        radial-gradient(circle at 90% 25%, rgba(108, 64, 255, .3), transparent 27%),
+        radial-gradient(circle at 50% 90%, rgba(0, 221, 255, .18), transparent 35%),
+        linear-gradient(135deg, #06142c, #0b2d58 50%, #111a45);
+
+      background-attachment: fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      opacity: .17;
+      pointer-events: none;
+
+      background-image:
+        radial-gradient(#7dd3fc 1px, transparent 1px),
+        radial-gradient(#ffffff 1px, transparent 1px);
+
+      background-size: 42px 42px, 75px 75px;
+      background-position: 0 0, 20px 25px;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      right: -230px;
+      top: 290px;
+      border-radius: 50%;
+      border: 1px solid rgba(125, 211, 252, .2);
+      box-shadow:
+        0 0 0 35px rgba(125, 211, 252, .06),
+        0 0 0 70px rgba(125, 211, 252, .04),
+        0 0 0 105px rgba(125, 211, 252, .03);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Cahaya dekoratif */
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .glow-one {
+      width: 180px;
+      height: 180px;
+      top: 8%;
+      left: -70px;
+      background: #008cff;
+      opacity: .35;
+    }
+
+    .glow-two {
+      width: 220px;
+      height: 220px;
+      right: -90px;
+      bottom: 10%;
+      background: #743cff;
+      opacity: .28;
+    }
+
+    .glow-three {
+      width: 130px;
+      height: 130px;
+      top: 55%;
+      left: 40%;
+      background: #00d9ff;
+      opacity: .18;
+    }
+
+    /* Navigasi */
+    nav {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(3, 15, 38, .72);
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      backdrop-filter: blur(15px);
+    }
+
+    .logo {
+      color: #7dd3fc;
+      font-size: 21px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      margin-left: 18px;
+      color: #dbeafe;
+      text-decoration: none;
+      font-size: 14px;
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: #55c9ff;
+    }
+
+    /* Bagian utama */
+    .hero {
+      min-height: 100vh;
+      padding: 105px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .avatar {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 22px;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, .8);
+      background: #12305f;
+      box-shadow:
+        0 0 25px rgba(54, 180, 255, .75),
+        0 0 70px rgba(54, 180, 255, .3);
+      animation: melayang 4s ease-in-out infinite;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes melayang {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .hero h1 {
+      margin-bottom: 12px;
+      font-size: clamp(30px, 6vw, 45px);
+    }
+
+    .hero h1 span {
+      color: #55c9ff;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #b7c7db;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .hero-button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 13px 24px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1689ee, #7047e8);
+      box-shadow: 0 8px 22px rgba(33, 133, 255, .4);
+      transition: .3s;
+    }
+
+    .hero-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(33, 133, 255, .6);
+    }
+
+    .down {
+      margin-top: 27px;
+      color: #9cddff;
+      font-size: 14px;
+      font-weight: bold;
+      animation: turun 1.5s infinite;
+    }
+
+    @keyframes turun {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(8px);
+      }
+    }
+
+    /* Konten */
+    main {
+      width: 100%;
+      max-width: 920px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .bubble {
+      margin: 22px 0;
+      padding: 25px;
+      border-radius: 23px;
+
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, .14),
+        rgba(255, 255, 255, .04)
+      );
+
+      border: 1px solid rgba(255, 255, 255, .14);
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, .24),
+        inset 0 1px rgba(255, 255, 255, .08);
+
+      backdrop-filter: blur(14px);
+
+      transform: translateY(40px) scale(.95);
+      opacity: 0;
+      transition: .75s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .bubble.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .section-title {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 12px;
+      color: #9cddff;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 999px;
+      background: rgba(53, 179, 255, .15);
+      border: 1px solid rgba(91, 200, 255, .25);
+    }
+
+    .bubble h2 {
+      margin-bottom: 15px;
+      color: white;
+      font-size: 23px;
+    }
+
+    .bubble p {
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    /* Data biodata */
+    .data-list {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .data-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 15px 18px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      transition: .3s;
+    }
+
+    .data-item:hover {
+      transform: translateX(7px);
+      background: rgba(38, 160, 255, .2);
+      border-color: rgba(100, 210, 255, .45);
+    }
+
+    .data-item span:first-child {
+      color: #91a7c2;
+      font-size: 14px;
+    }
+
+    .data-item span:last-child {
+      color: #f8fafc;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    /* Tag kesukaan */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      color: #dff7ff;
+      border-radius: 13px;
+      background: rgba(30, 151, 255, .17);
+      border: 1px solid rgba(91, 200, 255, .28);
+      transition: .3s;
+    }
+
+    .tag:hover {
+      transform: translateY(-4px) rotate(-2deg);
+      background: rgba(30, 151, 255, .3);
+    }
+
+    /* Kotak favorit dan impian */
+    .box-list {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .box-item {
+      padding: 16px 18px;
+      color: #dbeafe;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      transition: .3s;
+    }
+
+    .box-item:hover {
+      transform: translateX(7px);
+      background: rgba(38, 160, 255, .2);
+      border-color: rgba(100, 210, 255, .45);
+    }
+
+    .box-item strong {
+      color: #ffffff;
+    }
+
+    /* Sosial media */
+    .social-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 16px 18px;
+      color: white;
+      text-decoration: none;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .18);
+      transition: .35s ease;
+    }
+
+    .social-card:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+      font-size: 27px;
+      font-weight: bold;
+      border-radius: 15px;
+    }
+
+    .tiktok .social-icon {
+      background: linear-gradient(
+        135deg,
+        #00f2ea,
+        #111827 45%,
+        #ff0050
+      );
+    }
+
+    .whatsapp .social-icon {
+      background: linear-gradient(
+        135deg,
+        #25d366,
+        #128c7e
+      );
+    }
+
+    .social-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .social-info strong {
+      color: #ffffff;
+      font-size: 17px;
+    }
+
+    .social-info span {
+      margin-top: 3px;
+      color: #b9cbe0;
+      font-size: 13px;
+    }
+
+    .arrow {
+      color: #8bdcff;
+      font-size: 25px;
+      transition: .3s;
+    }
+
+    .social-card:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 28px 20px;
+      color: #91a7c2;
+      text-align: center;
+      background: rgba(0, 0, 0, .16);
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    /* Tampilan HP */
+    @media (max-width: 600px) {
+      nav {
+        padding: 14px 18px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      nav a {
+        margin-left: 8px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding-top: 95px;
+      }
+
+      .avatar {
+        width: 155px;
+        height: 155px;
+      }
+
+      main {
+        padding: 15px;
+      }
+
+      .bubble {
+        padding: 20px;
+      }
+
+      .data-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .data-item span:last-child {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cahaya dekoratif -->
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+  <div class="glow glow-three"></div>
+
+  <!-- Navigasi -->
+  <nav>
+    <div class="logo">FITO</div>
+
+    <div>
+      <a href="#tentang">Tentang</a>
+      <a href="#favorit">Favorit</a>
+      <a href="#impian">Impian</a>
+      <a href="#sosial">Sosial</a>
+    </div>
+  </nav>
+
+  <!-- Bagian pembuka -->
+  <section class="hero">
+    <div class="avatar">
+      <!-- Ganti foto-kamu.jpg dengan nama file fotomu -->
+      <img src="fitonih.jpg" alt="Foto profil Fito">
+    </div>
+
+    <h1>Hai saya <span>Fito</span></h1>
+
+    <p>
+      Selamat datang di website pribadi saya.
+      Saya suka editing, coding, bermain Roblox, dan belajar hal-hal baru.
+    </p>
+
+    <a href="#tentang" class="hero-button">
+      Kenali Lebih Jauh ↓
+    </a>
+
+    <div class="down">
+      Geser ke bawah
+    </div>
+  </section>
+
+  <main>
+
+    <!-- Biodata -->
+    <section class="bubble reveal" id="tentang">
+      <span class="section-title">Biodata</span>
+      <h2>Tentang Aku</h2>
+
+      <div class="data-list">
+        <div class="data-item">
+          <span>Nama lengkap</span>
+          <span>Alfito Ghavin Setyadi</span>
+        </div>
+
+        <div class="data-item">
+          <span>Panggilan</span>
+          <span>Fito</span>
+        </div>
+
+        <div class="data-item">
+          <span>Umur</span>
+          <span>13 tahun</span>
+        </div>
+
+        <div class="data-item">
+          <span>Tempat tinggal</span>
+          <span>Yogyakarta</span>
+        </div>
+
+        <div class="data-item">
+          <span>Bahasa</span>
+          <span>Bahasa Indonesia</span>
+        </div>
+
+        <div class="data-item">
+          <span>Bidang yang disukai</span>
+          <span>Editing / Coding</span>
+        </div>
+
+        <div class="data-item">
+          <span>Cita-cita</span>
+          <span>Editor / Programmer</span>
+        </div>
+
+        <div class="data-item">
+          <span>Ciri-ciri</span>
+          <span>Berkacamata</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perkenalan -->
+    <section class="bubble reveal">
+      <span class="section-title">Perkenalan</span>
+      <h2>Tentang Saya</h2>
+
+      <p>
+        Saya adalah Alfito Ghavin Setyadi. Saya berumur 13 tahun dan tinggal
+        di Yogyakarta. Saya suka editing dan coding. Saya juga mudah paham
+        ketika mempelajari sesuatu yang baru.
+      </p>
+    </section>
+
+    <!-- Kesukaan -->
+    <section class="bubble reveal">
+      <span class="section-title">Kesukaan</span>
+      <h2>Hal yang Saya Suka</h2>
+
+      <div class="tags">
+        <span class="tag">Editing</span>
+        <span class="tag">Coding</span>
+        <span class="tag">Telur</span>
+        <span class="tag">Ayam</span>
+        <span class="tag">Es susu coklat</span>
+        <span class="tag">Es teh</span>
+        <span class="tag">Warna hijau</span>
+        <span class="tag">Warna biru</span>
+        <span class="tag">MiawAug</span>
+        <span class="tag">Roblox</span>
+        <span class="tag">TikTok</span>
+        <span class="tag">Lari</span>
+      </div>
+    </section>
+
+    <!-- Favorit -->
+    <section class="bubble reveal" id="favorit">
+      <span class="section-title">Favorit</span>
+      <h2>Favoritku</h2>
+
+      <div class="box-list">
+        <div class="box-item">
+          <strong>🍗 Makanan:</strong>
+          Telur dan ayam
+        </div>
+
+        <div class="box-item">
+          <strong>🥤 Minuman:</strong>
+          Es susu coklat dan es teh
+        </div>
+
+        <div class="box-item">
+          <strong>🎨 Warna:</strong>
+          Hijau dan biru
+        </div>
+
+        <div class="box-item">
+          <strong>🎮 Game:</strong>
+          Roblox
+        </div>
+
+        <div class="box-item">
+          <strong>▶️ YouTuber:</strong>
+          MiawAug
+        </div>
+
+        <div class="box-item">
+          <strong>🏝️ Tempat:</strong>
+          Bali
+        </div>
+
+        <div class="box-item">
+          <strong>🏃 Olahraga:</strong>
+          Lari
+        </div>
+
+        <div class="box-item">
+          <strong>🐱 Hewan yang ingin dipelihara:</strong>
+          Kucing
+        </div>
+
+        <div class="box-item">
+          <strong>📱 Media sosial:</strong>
+          TikTok
+        </div>
+      </div>
+    </section>
+
+    <!-- Impian -->
+    <section class="bubble reveal" id="impian">
+      <span class="section-title">Impian</span>
+      <h2>Impian Saya</h2>
+
+      <div class="box-list">
+        <div class="box-item">
+          <strong>1.</strong>
+          Dibelikan laptop
+        </div>
+
+        <div class="box-item">
+          <strong>2.</strong>
+          Mempunyai laptop baru
+        </div>
+
+        <div class="box-item">
+          <strong>3.</strong>
+          Mendapatkan rangking 5 besar
+        </div>
+
+        <div class="box-item">
+          <strong>4.</strong>
+          Menjadi editor atau programmer yang hebat
+        </div>
+
+        <div class="box-item">
+          <strong>5.</strong>
+          Mempunyai kucing
+        </div>
+      </div>
+    </section>
+
+    <!-- Kegiatan -->
+    <section class="bubble reveal">
+      <span class="section-title">Kegiatan</span>
+      <h2>Kegiatan Sehari-hari</h2>
+
+      <div class="box-list">
+        <div class="box-item">1. Tidur</div>
+        <div class="box-item">2. Mandi</div>
+        <div class="box-item">3. Sekolah</div>
+        <div class="box-item">4. Coding</div>
+        <div class="box-item">5. Bermain Roblox</div>
+      </div>
+    </section>
+
+    <!-- Prinsip hidup -->
+    <section class="bubble reveal">
+      <span class="section-title">Prinsip</span>
+      <h2>Hal yang Saya Pegang</h2>
+
+      <p>
+        Saya suka jika janji ditepati. Saya juga menyukai cerita atau suasana
+        dengan judul “Akhir Tak Bahagia”.
+      </p>
+    </section>
+
+    <!-- Sosial media -->
+    <section class="bubble reveal" id="sosial">
+      <span class="section-title">Sosial Media</span>
+      <h2>Temui Saya</h2>
+
+      <div class="social-list">
+
+        <!-- TikTok -->
+        <a
+          class="social-card tiktok"
+          href="https://www.tiktok.com/@sowdkn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="social-icon">♪</div>
+
+          <div class="social-info">
+            <strong>TikTok</strong>
+            <span>@sowdkn</span>
+          </div>
+
+          <div class="arrow">→</div>
+        </a>
+
+        <!-- WhatsApp -->
+        <a
+          class="social-card whatsapp"
+          href="https://wa.me/6282227889155"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="social-icon">☏</div>
+
+          <div class="social-info">
+            <strong>WhatsApp</strong>
+            <span>Chat saya langsung</span>
+          </div>
+
+          <div class="arrow">→</div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Profil Alfito Ghavin Setyadi
+  </footer>
+
+  <script>
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+    elements.forEach(function(element) {
+      observer.observe(element);
+    });
+  </script>
+
+</body>
+</html>
