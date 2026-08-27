@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Halaman kedua website profil Fito">
+  <title>Halaman 2 - Fito</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #f8fafc;
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(circle at 10% 15%, rgba(0, 174, 255, .35), transparent 25%),
+        radial-gradient(circle at 90% 25%, rgba(108, 64, 255, .3), transparent 27%),
+        radial-gradient(circle at 50% 90%, rgba(0, 221, 255, .18), transparent 35%),
+        linear-gradient(135deg, #06142c, #0b2d58 50%, #111a45);
+
+      background-attachment: fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      opacity: .17;
+      pointer-events: none;
+
+      background-image:
+        radial-gradient(#7dd3fc 1px, transparent 1px),
+        radial-gradient(#ffffff 1px, transparent 1px);
+
+      background-size: 42px 42px, 75px 75px;
+      background-position: 0 0, 20px 25px;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      right: -230px;
+      top: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(125, 211, 252, .2);
+      box-shadow:
+        0 0 0 35px rgba(125, 211, 252, .06),
+        0 0 0 70px rgba(125, 211, 252, .04),
+        0 0 0 105px rgba(125, 211, 252, .03);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .glow-one {
+      width: 180px;
+      height: 180px;
+      top: 8%;
+      left: -70px;
+      background: #008cff;
+      opacity: .35;
+    }
+
+    .glow-two {
+      width: 220px;
+      height: 220px;
+      right: -90px;
+      bottom: 10%;
+      background: #743cff;
+      opacity: .28;
+    }
+
+    .glow-three {
+      width: 130px;
+      height: 130px;
+      top: 55%;
+      left: 40%;
+      background: #00d9ff;
+      opacity: .18;
+    }
+
+    nav {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(3, 15, 38, .72);
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      backdrop-filter: blur(15px);
+    }
+
+    .logo {
+      color: #7dd3fc;
+      font-size: 21px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      margin-left: 18px;
+      color: #dbeafe;
+      text-decoration: none;
+      font-size: 14px;
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: #55c9ff;
+    }
+
+    .hero {
+      min-height: 75vh;
+      padding: 110px 24px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin-bottom: 14px;
+      font-size: clamp(30px, 6vw, 45px);
+    }
+
+    .hero h1 span {
+      color: #55c9ff;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #b7c7db;
+      line-height: 1.8;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 13px 23px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1689ee, #7047e8);
+      box-shadow: 0 8px 22px rgba(33, 133, 255, .4);
+      transition: .3s;
+    }
+
+    .button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(33, 133, 255, .6);
+    }
+
+    main {
+      width: 100%;
+      max-width: 920px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .bubble {
+      margin: 22px 0;
+      padding: 25px;
+      border-radius: 23px;
+
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, .14),
+        rgba(255, 255, 255, .04)
+      );
+
+      border: 1px solid rgba(255, 255, 255, .14);
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, .24),
+        inset 0 1px rgba(255, 255, 255, .08);
+
+      backdrop-filter: blur(14px);
+
+      transform: translateY(40px) scale(.95);
+      opacity: 0;
+      transition: .75s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .bubble.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .section-title {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 12px;
+      color: #9cddff;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 999px;
+      background: rgba(53, 179, 255, .15);
+      border: 1px solid rgba(91, 200, 255, .25);
+    }
+
+    .bubble h2 {
+      margin-bottom: 15px;
+      color: white;
+      font-size: 23px;
+    }
+
+    .bubble p {
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .list-item {
+      padding: 16px 18px;
+      color: #dbeafe;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      transition: .3s;
+    }
+
+    .list-item:hover {
+      transform: translateX(7px);
+      background: rgba(38, 160, 255, .2);
+      border-color: rgba(100, 210, 255, .45);
+    }
+
+    .list-item strong {
+      color: white;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .project {
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      transition: .3s;
+    }
+
+    .project:hover {
+      transform: translateY(-7px);
+      background: rgba(30, 151, 255, .18);
+    }
+
+    .project .emoji {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 35px;
+    }
+
+    .project h3 {
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .project p {
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 28px 20px;
+      color: #91a7c2;
+      text-align: center;
+      background: rgba(0, 0, 0, .16);
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 14px 16px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      nav a {
+        margin-left: 7px;
+        font-size: 10px;
+      }
+
+      main {
+        padding: 15px;
+      }
+
+      .bubble {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+  <div class="glow glow-three"></div>
+
+  <nav>
+    <div class="logo">FITO</div>
+
+    <div>
+      <a href="index.html">Beranda</a>
+      <a href="#cerita">Cerita</a>
+      <a href="#projek">Projek</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Halaman <span>Kedua</span></h1>
+
+    <p>
+      Di halaman ini saya bisa menampilkan cerita, projek coding,
+      hasil editing, atau hal-hal menarik lainnya.
+    </p>
+
+    <a href="index.html" class="button">
+      ← Kembali ke Beranda
+    </a>
+  </section>
+
+  <main>
+
+    <section class="bubble reveal" id="cerita">
+      <span class="section-title">Cerita</span>
+      <h2>Tentang Perjalanan Saya</h2>
+
+      <p>
+        Saya mulai tertarik dengan dunia coding dan editing karena ingin
+        membuat sesuatu yang keren menggunakan kreativitas saya sendiri.
+        Dari belajar sedikit demi sedikit, saya ingin terus mengembangkan
+        kemampuan saya.
+      </p>
+    </section>
+
+    <section class="bubble reveal" id="projek">
+      <span class="section-title">Projek</span>
+      <h2>Projek yang Ingin Dibuat</h2>
+
+      <div class="project-grid">
+        <div class="project">
+          <span class="emoji">💻</span>
+          <h3>Website Pribadi</h3>
+          <p>Website tentang data diri dan profil saya.</p>
+        </div>
+
+        <div class="project">
+          <span class="emoji">🎮</span>
+          <h3>Game Sederhana</h3>
+          <p>Membuat game sederhana yang bisa dimainkan.</p>
+        </div>
+
+        <div class="project">
+          <span class="emoji">🎬</span>
+          <h3>Editing Video</h3>
+          <p>Membuat video dengan efek dan editing yang menarik.</p>
+        </div>
+
+        <div class="project">
+          <span class="emoji">🚀</span>
+          <h3>Belajar Coding</h3>
+          <p>Mempelajari HTML, CSS, JavaScript, dan bahasa pemrograman lainnya.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bubble reveal">
+      <span class="section-title">Target</span>
+      <h2>Target Saya</h2>
+
+      <div class="list">
+        <div class="list-item">
+          <strong>1.</strong>
+          Menjadi lebih jago coding.
+        </div>
+
+        <div class="list-item">
+          <strong>2.</strong>
+          Membuat website yang lebih keren.
+        </div>
+
+        <div class="list-item">
+          <strong>3.</strong>
+          Belajar editing video dengan lebih baik.
+        </div>
+
+        <div class="list-item">
+          <strong>4.</strong>
+          Mendapatkan laptop baru.
+        </div>
+
+        <div class="list-item">
+          <strong>5.</strong>
+          Mendapatkan rangking 5 besar.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Profil Alfito Ghavin Setyadi
+  </footer>
+
+  <script>
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+    elements.forEach(function(element) {
+      observer.observe(element);
+    });
+  </script>
+
+</body>
+</html>
